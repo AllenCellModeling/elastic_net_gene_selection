@@ -43,6 +43,7 @@ requirements = [
     "glmnet_py",
     "numpy",
     "pandas",
+    "scanpy",
     "sklearn",
 ]
 
