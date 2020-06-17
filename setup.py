@@ -37,16 +37,21 @@ dev_requirements = [
     "wheel>=0.34.2",
 ]
 
-requirements = []
+interactive_requirements = ["altair"]
+
+requirements = [
+    "glmnet_py",
+    "numpy",
+    "pandas",
+    "sklearn",
+]
 
 extra_requirements = {
     "setup": setup_requirements,
     "test": test_requirements,
     "dev": dev_requirements,
-    "all": [
-        *requirements,
-        *dev_requirements,
-    ]
+    "interactive": interactive_requirements,
+    "all": [*requirements, *dev_requirements, *interactive_requirements],
 }
 
 setup(
