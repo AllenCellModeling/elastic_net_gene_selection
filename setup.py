@@ -40,7 +40,6 @@ dev_requirements = [
 interactive_requirements = ["altair"]
 
 requirements = [
-    "glmnet_py",
     "numpy",
     "pandas",
     "scanpy",
