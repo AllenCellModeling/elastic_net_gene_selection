@@ -37,9 +37,8 @@ dev_requirements = [
     "wheel>=0.34.2",
 ]
 
-interactive_requirements = ["altair"]
-
 requirements = [
+    "altair",
     "numpy",
     "pandas",
     "scanpy",
@@ -50,8 +49,7 @@ extra_requirements = {
     "setup": setup_requirements,
     "test": test_requirements,
     "dev": dev_requirements,
-    "interactive": interactive_requirements,
-    "all": [*requirements, *dev_requirements, *interactive_requirements],
+    "all": [*requirements, *dev_requirements],
 }
 
 setup(
