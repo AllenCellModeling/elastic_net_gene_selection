@@ -181,7 +181,6 @@
   <h1>Source code for elastic_net_gene_selection.utils.data</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -191,15 +190,34 @@
     <span class="n">adata_in</span><span class="p">,</span>
     <span class="n">nz_thresh</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
     <span class="n">transform</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">,</span>
-    <span class="n">f_coding_genes</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">PurePath</span><span class="p">(</span>
-        <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="s2">&quot;Ensembl_protein_coding_genes.csv&quot;</span>
-    <span class="p">),</span>
-    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;_HUMAN&quot;</span><span class="p">,</span>
+    <span class="n">coding_genes</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;11&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;13&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;17&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;23&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;29&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;31&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;37&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;41&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;43&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;47&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;53&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;59&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;61&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;67&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;71&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;73&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;79&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;83&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;89&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;97&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
 <span class="p">):</span>
-
-    <span class="c1"># load list of protein coding genes</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f_coding_genes</span><span class="p">)</span>
-    <span class="n">coding_genes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">+</span> <span class="n">suffix</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Gene name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()]</span>
 
     <span class="c1"># filter our data for only protein coding genes</span>
     <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">adata_in</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coding_genes</span><span class="p">])</span>
@@ -213,7 +231,7 @@
     <span class="k">return</span> <span class="n">adata</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="subset"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.data.subset">[docs]</a><span class="k">def</span> <span class="nf">subset</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;D0&quot;</span><span class="p">]):</span>
+<div class="viewcode-block" id="subset"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.data.subset">[docs]</a><span class="k">def</span> <span class="nf">subset</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]):</span>
     <span class="k">if</span> <span class="n">days</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">adata</span>
     <span class="k">else</span><span class="p">:</span>
