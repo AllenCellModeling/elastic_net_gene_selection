@@ -17,6 +17,7 @@ conda activate enetgsel
 ```
 
 Then:
+
 **Stable Release:** `pip install elastic_net_gene_selection`<br>
 **Development Head:** `pip install git+https://github.com/AllenCellModeling/elastic_net_gene_selection.git`
 
