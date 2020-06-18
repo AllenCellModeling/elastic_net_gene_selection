@@ -65,11 +65,7 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="scRNA-seq gene selection code",
-    entry_points={
-        "console_scripts": [
-            "my_example=elastic_net_gene_selection.bin.my_example:main"
-        ],
-    },
+    entry_points={},
     install_requires=requirements,
     license="Allen Institute Software License",
     long_description=readme,
