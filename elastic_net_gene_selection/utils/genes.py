@@ -14,16 +14,6 @@ def get_gene_set(df, num_genes=25):
     return closest_gene_subset
 
 
-def get_selected_betas(m_fit):
-    betas = m_fit["beta"]
-    betas_bool = [b != 0 for b in betas]
-    for i, a in enumerate(betas_bool):
-        for j, b in enumerate(betas_bool):
-            if i > j:
-                assert np.array_equal(a, b)
-    return betas_bool[0]
-
-
 def filter_out_unpenalized_genes(beta, unpenalized_genes, all_genes):
     beta_out = beta.copy()
     assert beta_out.shape[0] == len(all_genes)
