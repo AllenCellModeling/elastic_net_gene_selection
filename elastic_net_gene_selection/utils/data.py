@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pathlib
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -10,15 +9,34 @@ def preprocess(
     adata_in,
     nz_thresh=0.05,
     transform=np.arcsinh,
-    f_coding_genes=pathlib.PurePath(
-        pathlib.Path(__file__).parent.resolve(), "Ensembl_protein_coding_genes.csv"
-    ),
-    suffix="_HUMAN",
+    coding_genes=[
+        "2",
+        "3",
+        "5",
+        "7",
+        "11",
+        "13",
+        "17",
+        "19",
+        "23",
+        "29",
+        "31",
+        "37",
+        "41",
+        "43",
+        "47",
+        "53",
+        "59",
+        "61",
+        "67",
+        "71",
+        "73",
+        "79",
+        "83",
+        "89",
+        "97",
+    ],
 ):
-
-    # load list of protein coding genes
-    df = pd.read_csv(f_coding_genes)
-    coding_genes = [str(g) + suffix for g in df["Gene name"].unique()]
 
     # filter our data for only protein coding genes
     cols = np.array([c for c in adata_in.var.index if c in coding_genes])
@@ -32,7 +50,7 @@ def preprocess(
     return adata.copy()
 
 
-def subset(adata, days=["D0"]):
+def subset(adata, days=["0"]):
     if days == "all":
         return adata
     else:
