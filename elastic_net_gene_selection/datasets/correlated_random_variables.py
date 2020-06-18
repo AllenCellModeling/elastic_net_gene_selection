@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import scanpy as sc
+from statsmodels.stats.moment_helpers import cov2corr
 
 
 def random_corr_mat(D=10, beta=1):
@@ -30,7 +31,6 @@ def random_corr_mat(D=10, beta=1):
 
 
 def hub_spoke_corr_mat(D=50, groups=5, v=0.3, u=0.1):
-    from statsmodels.stats.moment_helpers import cov2corr
 
     G = D // groups  # group size
     Theta = np.zeros([D, D])
