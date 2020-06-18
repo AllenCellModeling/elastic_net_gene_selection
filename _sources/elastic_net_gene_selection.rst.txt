@@ -1,0 +1,20 @@
+elastic\_net\_gene\_selection package
+=====================================
+
+Subpackages
+-----------
+
+.. toctree::
+
+   elastic_net_gene_selection.bin
+   elastic_net_gene_selection.datasets
+   elastic_net_gene_selection.solvers
+   elastic_net_gene_selection.utils
+
+Module contents
+---------------
+
+.. automodule:: elastic_net_gene_selection
+   :members:
+   :undoc-members:
+   :show-inheritance:

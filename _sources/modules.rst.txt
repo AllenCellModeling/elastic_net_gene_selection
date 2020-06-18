@@ -1,0 +1,7 @@
+elastic_net_gene_selection
+==========================
+
+.. toctree::
+   :maxdepth: 4
+
+   elastic_net_gene_selection

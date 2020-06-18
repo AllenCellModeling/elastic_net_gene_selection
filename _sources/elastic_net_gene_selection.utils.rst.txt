@@ -1,0 +1,38 @@
+elastic\_net\_gene\_selection.utils package
+===========================================
+
+Submodules
+----------
+
+elastic\_net\_gene\_selection.utils.data module
+-----------------------------------------------
+
+.. automodule:: elastic_net_gene_selection.utils.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+elastic\_net\_gene\_selection.utils.genes module
+------------------------------------------------
+
+.. automodule:: elastic_net_gene_selection.utils.genes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+elastic\_net\_gene\_selection.utils.plots module
+------------------------------------------------
+
+.. automodule:: elastic_net_gene_selection.utils.plots
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: elastic_net_gene_selection.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

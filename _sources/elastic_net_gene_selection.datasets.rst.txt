@@ -1,0 +1,22 @@
+elastic\_net\_gene\_selection.datasets package
+==============================================
+
+Submodules
+----------
+
+elastic\_net\_gene\_selection.datasets.correlated\_random\_variables module
+---------------------------------------------------------------------------
+
+.. automodule:: elastic_net_gene_selection.datasets.correlated_random_variables
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: elastic_net_gene_selection.datasets
+   :members:
+   :undoc-members:
+   :show-inheritance:

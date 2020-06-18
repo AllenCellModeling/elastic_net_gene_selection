@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>elastic_net_gene_selection.utils.genes &mdash; Elastic Net Gene Selection 0.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Elastic Net Gene Selection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../elastic_net_gene_selection.html">elastic_net_gene_selection package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../elastic_net_gene_selection.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../elastic_net_gene_selection.bin.html">elastic_net_gene_selection.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../elastic_net_gene_selection.datasets.html">elastic_net_gene_selection.datasets package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../elastic_net_gene_selection.solvers.html">elastic_net_gene_selection.solvers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../elastic_net_gene_selection.utils.html">elastic_net_gene_selection.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elastic_net_gene_selection.html#module-elastic_net_gene_selection">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../math.html">Math notation example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Elastic Net Gene Selection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../elastic_net_gene_selection.html">elastic_net_gene_selection</a> &raquo;</li>
+        
+      <li>elastic_net_gene_selection.utils.genes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for elastic_net_gene_selection.utils.genes</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="get_gene_set"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.genes.get_gene_set">[docs]</a><span class="k">def</span> <span class="nf">get_gene_set</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">num_genes</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+    <span class="n">gene_subset_sizes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Number of genes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">closest_gene_subset_size</span> <span class="o">=</span> <span class="n">gene_subset_sizes</span><span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">gene_subset_sizes</span> <span class="o">-</span> <span class="n">num_genes</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="n">closest_gene_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Number of genes&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">closest_gene_subset_size</span><span class="p">][</span>
+        <span class="s2">&quot;Gene name&quot;</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="k">return</span> <span class="n">closest_gene_subset</span></div>
+
+
+<div class="viewcode-block" id="get_selected_betas"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.genes.get_selected_betas">[docs]</a><span class="k">def</span> <span class="nf">get_selected_betas</span><span class="p">(</span><span class="n">m_fit</span><span class="p">):</span>
+    <span class="n">betas</span> <span class="o">=</span> <span class="n">m_fit</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">]</span>
+    <span class="n">betas_bool</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">betas</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas_bool</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas_bool</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">betas_bool</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="filter_out_unpenalized_genes"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.genes.filter_out_unpenalized_genes">[docs]</a><span class="k">def</span> <span class="nf">filter_out_unpenalized_genes</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">unpenalized_genes</span><span class="p">,</span> <span class="n">all_genes</span><span class="p">):</span>
+    <span class="n">beta_out</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">beta_out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_genes</span><span class="p">)</span>
+    <span class="n">unpenalized_genes_bool_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">gene</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">unpenalized_genes</span><span class="p">)</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">all_genes</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">beta_out</span><span class="p">[</span><span class="n">unpenalized_genes_bool_inds</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">beta_out</span></div>
+
+
+<div class="viewcode-block" id="get_selected_genes"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.genes.get_selected_genes">[docs]</a><span class="k">def</span> <span class="nf">get_selected_genes</span><span class="p">(</span>
+    <span class="n">boot_results</span><span class="p">,</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">lambda_index</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
+    <span class="n">selection_threshold_index</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
+    <span class="n">thresholds</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">unpenalized_genes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+<span class="p">):</span>
+    <span class="n">boot_betas</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">filter_out_unpenalized_genes</span><span class="p">(</span>
+            <span class="n">beta</span><span class="o">=</span><span class="n">br</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">],</span>
+            <span class="n">unpenalized_genes</span><span class="o">=</span><span class="n">unpenalized_genes</span><span class="p">,</span>
+            <span class="n">all_genes</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">br</span> <span class="ow">in</span> <span class="n">boot_results</span>
+    <span class="p">]</span>
+    <span class="n">gsel_bool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">boot_betas</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">genes_bool</span> <span class="o">=</span> <span class="n">gsel_bool</span><span class="p">[:,</span> <span class="n">lambda_index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">thresholds</span><span class="p">[</span><span class="n">selection_threshold_index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">g</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">])[</span><span class="n">genes_bool</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Rory Donovan-Maiye
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

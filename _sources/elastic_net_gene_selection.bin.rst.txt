@@ -1,0 +1,10 @@
+elastic\_net\_gene\_selection.bin package
+=========================================
+
+Module contents
+---------------
+
+.. automodule:: elastic_net_gene_selection.bin
+   :members:
+   :undoc-members:
+   :show-inheritance:

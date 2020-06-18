@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>elastic_net_gene_selection.solvers package &mdash; Elastic Net Gene Selection 0.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="elastic_net_gene_selection.utils package" href="elastic_net_gene_selection.utils.html" />
+    <link rel="prev" title="elastic_net_gene_selection.datasets package" href="elastic_net_gene_selection.datasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Elastic Net Gene Selection
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Package modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="elastic_net_gene_selection.html">elastic_net_gene_selection package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="elastic_net_gene_selection.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="elastic_net_gene_selection.bin.html">elastic_net_gene_selection.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="elastic_net_gene_selection.datasets.html">elastic_net_gene_selection.datasets package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">elastic_net_gene_selection.solvers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="elastic_net_gene_selection.utils.html">elastic_net_gene_selection.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="elastic_net_gene_selection.html#module-elastic_net_gene_selection">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Math notation example</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Elastic Net Gene Selection</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">elastic_net_gene_selection</a> &raquo;</li>
+        
+          <li><a href="elastic_net_gene_selection.html">elastic_net_gene_selection package</a> &raquo;</li>
+        
+      <li>elastic_net_gene_selection.solvers package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/elastic_net_gene_selection.solvers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="elastic_net_gene_selection.utils.html" class="btn btn-neutral float-right" title="elastic_net_gene_selection.utils package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="elastic_net_gene_selection.datasets.html" class="btn btn-neutral float-left" title="elastic_net_gene_selection.datasets package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="elastic-net-gene-selection-solvers-package">
+<h1>elastic_net_gene_selection.solvers package<a class="headerlink" href="#elastic-net-gene-selection-solvers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-elastic_net_gene_selection.solvers.linear">
+<span id="elastic-net-gene-selection-solvers-linear-module"></span><h2>elastic_net_gene_selection.solvers.linear module<a class="headerlink" href="#module-elastic_net_gene_selection.solvers.linear" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="elastic_net_gene_selection.solvers.linear.parallel_runs">
+<code class="sig-prename descclassname">elastic_net_gene_selection.solvers.linear.</code><code class="sig-name descname">parallel_runs</code><span class="sig-paren">(</span><em class="sig-param">adata</em>, <em class="sig-param">n_processes=10</em>, <em class="sig-param">n_bootstraps=1000</em>, <em class="sig-param">X_noise=0.01</em>, <em class="sig-param">y_noise=0.5</em>, <em class="sig-param">alpha=0.9</em>, <em class="sig-param">lambda_path=array([10.</em>, <em class="sig-param">4.64158883</em>, <em class="sig-param">2.15443469</em>, <em class="sig-param">1.</em>, <em class="sig-param">0.46415888</em>, <em class="sig-param">0.21544347</em>, <em class="sig-param">0.1</em>, <em class="sig-param">0.04641589</em>, <em class="sig-param">0.02154435</em>, <em class="sig-param">0.01      ])</em>, <em class="sig-param">target_col='day'</em>, <em class="sig-param">target_map={'0': 0</em>, <em class="sig-param">'1': 1</em>, <em class="sig-param">'2': 2}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/elastic_net_gene_selection/solvers/linear.html#parallel_runs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#elastic_net_gene_selection.solvers.linear.parallel_runs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="elastic_net_gene_selection.solvers.linear.worker">
+<code class="sig-prename descclassname">elastic_net_gene_selection.solvers.linear.</code><code class="sig-name descname">worker</code><span class="sig-paren">(</span><em class="sig-param">boot_inds</em>, <em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">X_noise=0.01</em>, <em class="sig-param">y_noise=0.5</em>, <em class="sig-param">alpha=0.9</em>, <em class="sig-param">lambda_path=array([1.</em>, <em class="sig-param">0.95454846</em>, <em class="sig-param">0.91116276</em>, <em class="sig-param">0.869749</em>, <em class="sig-param">0.83021757</em>, <em class="sig-param">0.7924829</em>, <em class="sig-param">0.75646333</em>, <em class="sig-param">0.7220809</em>, <em class="sig-param">0.68926121</em>, <em class="sig-param">0.65793322</em>, <em class="sig-param">0.62802914</em>, <em class="sig-param">0.59948425</em>, <em class="sig-param">0.57223677</em>, <em class="sig-param">0.54622772</em>, <em class="sig-param">0.52140083</em>, <em class="sig-param">0.49770236</em>, <em class="sig-param">0.47508102</em>, <em class="sig-param">0.45348785</em>, <em class="sig-param">0.43287613</em>, <em class="sig-param">0.41320124</em>, <em class="sig-param">0.39442061</em>, <em class="sig-param">0.37649358</em>, <em class="sig-param">0.35938137</em>, <em class="sig-param">0.34304693</em>, <em class="sig-param">0.32745492</em>, <em class="sig-param">0.31257158</em>, <em class="sig-param">0.29836472</em>, <em class="sig-param">0.28480359</em>, <em class="sig-param">0.27185882</em>, <em class="sig-param">0.25950242</em>, <em class="sig-param">0.24770764</em>, <em class="sig-param">0.23644894</em>, <em class="sig-param">0.22570197</em>, <em class="sig-param">0.21544347</em>, <em class="sig-param">0.20565123</em>, <em class="sig-param">0.19630407</em>, <em class="sig-param">0.18738174</em>, <em class="sig-param">0.17886495</em>, <em class="sig-param">0.17073526</em>, <em class="sig-param">0.16297508</em>, <em class="sig-param">0.15556761</em>, <em class="sig-param">0.14849683</em>, <em class="sig-param">0.14174742</em>, <em class="sig-param">0.13530478</em>, <em class="sig-param">0.12915497</em>, <em class="sig-param">0.12328467</em>, <em class="sig-param">0.1176812</em>, <em class="sig-param">0.1123324</em>, <em class="sig-param">0.10722672</em>, <em class="sig-param">0.1023531</em>, <em class="sig-param">0.097701</em>, <em class="sig-param">0.09326033</em>, <em class="sig-param">0.08902151</em>, <em class="sig-param">0.08497534</em>, <em class="sig-param">0.08111308</em>, <em class="sig-param">0.07742637</em>, <em class="sig-param">0.07390722</em>, <em class="sig-param">0.07054802</em>, <em class="sig-param">0.06734151</em>, <em class="sig-param">0.06428073</em>, <em class="sig-param">0.06135907</em>, <em class="sig-param">0.05857021</em>, <em class="sig-param">0.0559081</em>, <em class="sig-param">0.05336699</em>, <em class="sig-param">0.05094138</em>, <em class="sig-param">0.04862602</em>, <em class="sig-param">0.04641589</em>, <em class="sig-param">0.04430621</em>, <em class="sig-param">0.04229243</em>, <em class="sig-param">0.04037017</em>, <em class="sig-param">0.03853529</em>, <em class="sig-param">0.0367838</em>, <em class="sig-param">0.03511192</em>, <em class="sig-param">0.03351603</em>, <em class="sig-param">0.03199267</em>, <em class="sig-param">0.03053856</em>, <em class="sig-param">0.02915053</em>, <em class="sig-param">0.02782559</em>, <em class="sig-param">0.02656088</em>, <em class="sig-param">0.02535364</em>, <em class="sig-param">0.02420128</em>, <em class="sig-param">0.0231013</em>, <em class="sig-param">0.02205131</em>, <em class="sig-param">0.02104904</em>, <em class="sig-param">0.02009233</em>, <em class="sig-param">0.0191791</em>, <em class="sig-param">0.01830738</em>, <em class="sig-param">0.01747528</em>, <em class="sig-param">0.01668101</em>, <em class="sig-param">0.01592283</em>, <em class="sig-param">0.01519911</em>, <em class="sig-param">0.01450829</em>, <em class="sig-param">0.01384886</em>, <em class="sig-param">0.01321941</em>, <em class="sig-param">0.01261857</em>, <em class="sig-param">0.01204504</em>, <em class="sig-param">0.01149757</em>, <em class="sig-param">0.01097499</em>, <em class="sig-param">0.01047616</em>, <em class="sig-param">0.01      ])</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/elastic_net_gene_selection/solvers/linear.html#worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#elastic_net_gene_selection.solvers.linear.worker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-elastic_net_gene_selection.solvers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-elastic_net_gene_selection.solvers" title="Permalink to this headline">¶</a></h2>
+<p>Solvers package for elastic_net_gene_selection.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Rory Donovan-Maiye
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
