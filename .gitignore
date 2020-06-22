@@ -1,4 +1,5 @@
 docs/modules.rst
+/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
