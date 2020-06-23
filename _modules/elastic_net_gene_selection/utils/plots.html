@@ -183,53 +183,29 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
 
-<span class="kn">from</span> <span class="nn">.genes</span> <span class="kn">import</span> <span class="n">filter_out_unpenalized_genes</span>
 <span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">tidy</span>
 
 <span class="n">alt</span><span class="o">.</span><span class="n">data_transformers</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="n">max_rows</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="thresh_lambda_plot"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.plots.thresh_lambda_plot">[docs]</a><span class="k">def</span> <span class="nf">thresh_lambda_plot</span><span class="p">(</span>
-    <span class="n">boot_results</span><span class="p">,</span>
-    <span class="n">adata</span><span class="p">,</span>
-    <span class="n">thresholds</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
-    <span class="n">lambdas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
-    <span class="n">unpenalized_genes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
-<span class="p">):</span>
-
-    <span class="n">boot_betas</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">filter_out_unpenalized_genes</span><span class="p">(</span>
-            <span class="n">beta</span><span class="o">=</span><span class="n">br</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">],</span>
-            <span class="n">unpenalized_genes</span><span class="o">=</span><span class="n">unpenalized_genes</span><span class="p">,</span>
-            <span class="n">all_genes</span><span class="o">=</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">],</span>
-        <span class="p">)</span>
-        <span class="k">for</span> <span class="n">br</span> <span class="ow">in</span> <span class="n">boot_results</span>
-    <span class="p">]</span>
-    <span class="n">gsel_bool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">boot_betas</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">gsel_thresh</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gsel_bool</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span><span class="p">))</span> <span class="k">for</span> <span class="n">thresh</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lambdas</span><span class="p">)</span>
-    <span class="p">]</span>
-
-    <span class="n">df_sel_thresh_alpha</span> <span class="o">=</span> <span class="n">tidy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">gsel_thresh</span><span class="p">))</span>
-    <span class="n">df_sel_thresh_alpha</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;lambda index&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;selection threshold index&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;number of genes selected&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-    <span class="n">df_sel_thresh_alpha</span><span class="p">[</span><span class="s2">&quot;log number of genes selected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span>
-        <span class="n">df_sel_thresh_alpha</span><span class="p">[</span><span class="s2">&quot;number of genes selected&quot;</span><span class="p">]</span>
-    <span class="p">)</span>
-
+<div class="viewcode-block" id="thresh_lambda_plot"><a class="viewcode-back" href="../../../elastic_net_gene_selection.utils.html#elastic_net_gene_selection.utils.plots.thresh_lambda_plot">[docs]</a><span class="k">def</span> <span class="nf">thresh_lambda_plot</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">mychart</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_sel_thresh_alpha</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+        <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
         <span class="o">.</span><span class="n">mark_rect</span><span class="p">()</span>
         <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-            <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;selection threshold index:O&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">paddingInner</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
-            <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;lambda index:O&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">paddingInner</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
-            <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span>
-                <span class="s2">&quot;log number of genes selected:Q&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;greys&quot;</span><span class="p">)</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span>
+                <span class="s2">&quot;selection threshold:O&quot;</span><span class="p">,</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">paddingInner</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">),</span>
             <span class="p">),</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span>
+                <span class="s2">&quot;lambda:O&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">paddingInner</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span>
+                <span class="s2">&quot;number of genes selected:Q&quot;</span><span class="p">,</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;greys&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;symlog&quot;</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;selected genes&quot;</span><span class="p">],</span>
         <span class="p">)</span>
     <span class="p">)</span>
 

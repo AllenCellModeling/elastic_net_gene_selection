@@ -212,10 +212,13 @@
     <span class="p">)</span>
 
     <span class="n">lambdas_enet</span><span class="p">,</span> <span class="n">coefs_enet</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">enet_path</span><span class="p">(</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="n">lambda_path</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span>
+        <span class="n">X_boot</span><span class="p">,</span> <span class="n">y_boot</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="n">lambda_path</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="n">coefs_enet</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;lambda_path&quot;</span><span class="p">:</span> <span class="n">lambdas_enet</span><span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="n">coefs_enet</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;lambda_path&quot;</span><span class="p">:</span> <span class="n">lambdas_enet</span><span class="p">,</span>
+    <span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="parallel_runs"><a class="viewcode-back" href="../../../elastic_net_gene_selection.solvers.html#elastic_net_gene_selection.solvers.linear.parallel_runs">[docs]</a><span class="k">def</span> <span class="nf">parallel_runs</span><span class="p">(</span>
