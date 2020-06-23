@@ -32,10 +32,13 @@ def worker(
     )
 
     lambdas_enet, coefs_enet, _ = enet_path(
-        X, y, l1_ratio=alpha, alphas=lambda_path, fit_intercept=False
+        X_boot, y_boot, l1_ratio=alpha, alphas=lambda_path, fit_intercept=False
     )
 
-    return {"beta": coefs_enet != 0, "lambda_path": lambdas_enet}
+    return {
+        "beta": coefs_enet != 0,
+        "lambda_path": lambdas_enet,
+    }
 
 
 def parallel_runs(
