@@ -3,53 +3,29 @@
 import numpy as np
 import altair as alt
 
-from .genes import filter_out_unpenalized_genes
 from .data import tidy
 
 alt.data_transformers.enable("default", max_rows=None)
 
 
-def thresh_lambda_plot(
-    boot_results,
-    adata,
-    thresholds=np.linspace(0.01, 1, num=10),
-    lambdas=np.geomspace(10, 0.01, num=10),
-    unpenalized_genes=np.array([]),
-):
-
-    boot_betas = [
-        filter_out_unpenalized_genes(
-            beta=br["beta"],
-            unpenalized_genes=unpenalized_genes,
-            all_genes=[g.split("_")[0] for g in adata.var.index.values],
-        )
-        for br in boot_results
-    ]
-    gsel_bool = np.stack(boot_betas).mean(axis=0)
-    gsel_thresh = [
-        [(np.sum(gsel_bool[:, j] >= thresh)) for thresh in thresholds]
-        for j, a in enumerate(lambdas)
-    ]
-
-    df_sel_thresh_alpha = tidy(np.stack(gsel_thresh))
-    df_sel_thresh_alpha.columns = [
-        "lambda index",
-        "selection threshold index",
-        "number of genes selected",
-    ]
-    df_sel_thresh_alpha["log number of genes selected"] = np.log1p(
-        df_sel_thresh_alpha["number of genes selected"]
-    )
-
+def thresh_lambda_plot(df):
     mychart = (
-        alt.Chart(df_sel_thresh_alpha, width=600, height=600)
+        alt.Chart(df, width=600, height=600)
         .mark_rect()
         .encode(
-            alt.X("selection threshold index:O", scale=alt.Scale(paddingInner=0)),
-            alt.Y("lambda index:O", scale=alt.Scale(paddingInner=0)),
-            alt.Color(
-                "log number of genes selected:Q", scale=alt.Scale(scheme="greys")
+            x=alt.X(
+                "selection threshold:O",
+                scale=alt.Scale(paddingInner=0),
+                axis=alt.Axis(format=".2f"),
             ),
+            y=alt.Y(
+                "lambda:O", scale=alt.Scale(paddingInner=0), axis=alt.Axis(format=".2f")
+            ),
+            color=alt.Color(
+                "number of genes selected:Q",
+                scale=alt.Scale(scheme="greys", type="symlog"),
+            ),
+            tooltip=["selected genes"],
         )
     )
 
