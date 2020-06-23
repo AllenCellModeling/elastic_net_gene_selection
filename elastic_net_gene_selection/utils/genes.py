@@ -32,14 +32,18 @@ def get_selected_genes(
     thresholds=np.linspace(0.01, 1, num=10),
     unpenalized_genes=np.array([]),
 ):
-    boot_betas = [
-        filter_out_unpenalized_genes(
-            beta=br["beta"],
-            unpenalized_genes=unpenalized_genes,
-            all_genes=[g.split("_")[0] for g in adata.var.index.values],
-        )
-        for br in boot_results
-    ]
+    if len(unpenalized_genes) > 0:
+        boot_betas = [
+            filter_out_unpenalized_genes(
+                beta=br["beta"],
+                unpenalized_genes=unpenalized_genes,
+                all_genes=adata.var.index,
+            )
+            for br in boot_results
+        ]
+    else:
+        boot_betas = [br["beta"] for br in boot_results]
+
     gsel_bool = np.stack(boot_betas).mean(axis=0)
     genes_bool = gsel_bool[:, lambda_index] > thresholds[selection_threshold_index]
-    return np.array([g.split("_")[0] for g in adata.var.index.values])[genes_bool]
+    return adata.var["gene_name"][genes_bool].values.astype(str)
