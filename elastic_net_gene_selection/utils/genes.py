@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-
-from .data import tidy
+import pandas as pd
+import swifter  # noqa F401
 
 
 def get_gene_set(df, num_genes=25):
@@ -26,83 +26,52 @@ def filter_out_unpenalized_genes(beta, unpenalized_genes, all_genes):
     return beta_out
 
 
-def get_selected_genes(
+def get_thresh_lambda_df(
     boot_results,
-    adata,
-    lambda_index=75,
-    selection_threshold_index=75,
-    thresholds=np.linspace(0.01, 1, num=10),
-    unpenalized_genes=np.array([]),
+    gene_names=[],
+    thresholds=np.linspace(0.01, 1, num=100),
+    lambdas=np.geomspace(10, 0.01, num=100),
 ):
-    if len(unpenalized_genes) > 0:
-        boot_betas = [
-            filter_out_unpenalized_genes(
-                beta=br["beta"],
-                unpenalized_genes=unpenalized_genes,
-                all_genes=adata.var.index,
-            )
-            for br in boot_results
-        ]
-    else:
-        boot_betas = [br["beta"] for br in boot_results]
+    """
+    get names of selected genes for each combination of thresholds and lambdas.
+    returns a df of results, with the list of gene names merged into one string 
+    for eachthreshold/lambda combo.
 
-    gsel_bool = np.stack(boot_betas).mean(axis=0)
-    genes_bool = gsel_bool[:, lambda_index] > thresholds[selection_threshold_index]
-    return adata.var["gene_name"][genes_bool].values.astype(str)
+    TODO: make this work (efficiently) with unpenalized genes
+    """
 
+    # fraction of times each gene is selected at each lambda
+    gsel_fracs = np.stack([b["beta"] for b in boot_results]).mean(axis=0)
 
-def thresh_lambda_df(
-    boot_results,
-    adata,
-    thresholds=np.linspace(0.01, 1, num=10),
-    lambdas=np.geomspace(10, 0.01, num=10),
-    unpenalized_genes=np.array([]),
-):
+    # make sure we're all lined up
+    assert gsel_fracs.shape == (len(gene_names), len(lambdas))
 
-    if len(unpenalized_genes) > 0:
-        boot_betas = [
-            filter_out_unpenalized_genes(
-                beta=br["beta"],
-                unpenalized_genes=unpenalized_genes,
-                all_genes=adata.var.index,
-            )
-            for br in boot_results
-        ]
-    else:
-        boot_betas = [br["beta"] for br in boot_results]
+    # make a df: one row per threshold + lambda (index) combo
+    index = pd.MultiIndex.from_product(
+        [thresholds, range(len(lambdas))], names=["selection threshold", "lambda index"]
+    )
+    df_thresh_lam = pd.DataFrame(index=index).reset_index()
 
-    gsel_bool = np.stack(boot_betas).mean(axis=0)
-    gsel_thresh = [
-        [(np.sum(gsel_bool[:, j] >= thresh)) for thresh in thresholds]
-        for j, a in enumerate(lambdas)
-    ]
-
-    df = tidy(np.stack(gsel_thresh))
-    df.columns = [
-        "lambda index",
-        "selection threshold index",
-        "number of genes selected",
-    ]
-
-    df["lambda"] = df["lambda index"].map(dict(enumerate(lambdas)))
-    df["selection threshold"] = df["selection threshold index"].map(
-        dict(enumerate(thresholds))
+    # we iterate on the index of each lambda, but really we want the lambdas in there
+    df_thresh_lam["lambda"] = df_thresh_lam["lambda index"].map(
+        dict(enumerate(lambdas))
     )
 
-    # get names of selected genes as a string, then make a partial function
-    df["selected genes"] = ""
+    # apply a name-getting-function to each row in parallel (using swifter)
+    df_thresh_lam["selected genes"] = df_thresh_lam.swifter.apply(
+        lambda row: gene_names[
+            gsel_fracs[:, int(row["lambda index"])] > row["selection threshold"]
+        ],
+        axis="columns",
+    )
 
-    for i, row in df.iterrows():
-        sel_gene_list = get_selected_genes(
-            boot_results,
-            adata,
-            lambda_index=row["lambda index"],
-            selection_threshold_index=row["selection threshold index"],
-            thresholds=thresholds,
-        )
-        sel_gene_str = ", ".join(sel_gene_list)
-        df.at[i, "selected genes"] = sel_gene_str
+    df_thresh_lam["number of genes selected"] = df_thresh_lam.swifter.apply(
+        lambda row: len(row["selected genes"]), axis="columns",
+    )
 
-    df.drop(["lambda index", "selection threshold index"], axis="columns")
+    df_thresh_lam["selected genes"] = df_thresh_lam["selected genes"].str.join(", ")
 
-    return df
+    # drop the temporary lambda index column
+    df_thresh_lam = df_thresh_lam.drop(["lambda index"], axis="columns")
+
+    return df_thresh_lam

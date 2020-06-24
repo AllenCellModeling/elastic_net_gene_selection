@@ -5,7 +5,7 @@ import pandas as pd
 
 from ..utils.genes import (
     get_gene_set,
-    get_selected_genes,
+    get_thresh_lambda_df,
 )
 from ..datasets.correlated_random_variables import HubSpokeData
 from ..solvers.linear import parallel_runs as linear_parallel
@@ -21,10 +21,11 @@ def test_get_gene_set(L=100):
     _ = get_gene_set(df, num_genes=10)
 
 
-def test_get_selected_genes():
+def test_get_thresh_lambda_df():
     hubspoke = HubSpokeData()
     adata = hubspoke.sample()
     adata.obs = pd.DataFrame({"day": np.random.choice(["0", "1", "2"], len(adata))})
+    hubspoke.var["Gene name"] = hubspoke.var.index.astype(str)
 
     boot_results = linear_parallel(
         adata,
@@ -33,15 +34,14 @@ def test_get_selected_genes():
         X_noise=0.01,
         y_noise=0.5,
         alpha=0.9,
-        lambda_path=np.geomspace(10, 0.01, num=100),
+        lambda_path=np.geomspace(10, 0.01, num=25),
         target_col="day",
         target_map={"0": 0, "1": 1, "2": 2},
     )
 
-    _ = get_selected_genes(
+    _ = get_thresh_lambda_df(
         boot_results,
-        adata,
-        lambda_index=50,
-        selection_threshold_index=75,
-        thresholds=np.linspace(0.01, 1, num=100),
+        gene_names=hubspoke.var["Gene name"].astype(str).values,
+        thresholds=np.linspace(0.01, 1, num=15),
+        lambdas=np.geomspace(10, 0.01, num=25),
     )

@@ -5,6 +5,7 @@ import pandas as pd
 import scanpy as sc
 from sklearn.datasets import make_regression
 
+from ..utils.genes import get_thresh_lambda_df
 from ..utils.plots import thresh_lambda_plot, hub_persistence_plot
 from ..datasets.correlated_random_variables import HubSpokeData
 from ..solvers.linear import parallel_runs as linear_parallel
@@ -19,8 +20,9 @@ def test_thresh_lambda_plot():
     yq = pd.qcut(y, 3, labels=["0", "1", "2"])
     obs = pd.DataFrame({"day": yq})
     obs.index = obs.index.map(str)
+    var = pd.DataFrame({"Gene name": [str(i) for i in range(X.shape[1])]})
 
-    adata = sc.AnnData(X=X, obs=obs)
+    adata = sc.AnnData(X=X, obs=obs, var=var)
 
     boot_results = linear_parallel(
         adata,
@@ -34,7 +36,14 @@ def test_thresh_lambda_plot():
         target_map={"0": 0, "1": 1, "2": 2},
     )
 
-    _ = thresh_lambda_plot(boot_results, adata)
+    df = get_thresh_lambda_df(
+        boot_results,
+        gene_names=adata.var["Gene name"].astype(str).values,
+        thresholds=np.linspace(0.01, 1, num=15),
+        lambdas=np.geomspace(10, 0.01, num=10),
+    )
+
+    _ = thresh_lambda_plot(df)
 
 
 def test_hub_persistence_plot():
