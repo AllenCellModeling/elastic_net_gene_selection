@@ -38,11 +38,12 @@ dev_requirements = [
 ]
 
 requirements = [
-    "altair",
     "numpy",
+    "altair",
+    "glmnet",
     "pandas",
     "scanpy",
-    "sklearn",
+    "scikit-learn<=0.22.2",
     "statsmodels",
     "swifter",
 ]

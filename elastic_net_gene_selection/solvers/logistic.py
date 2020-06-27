@@ -6,7 +6,7 @@ from functools import partial
 import numpy as np
 
 from sklearn.preprocessing import scale
-from sklearn.linear_model import enet_path
+from glmnet import LogitNet
 
 
 def worker(
@@ -14,9 +14,8 @@ def worker(
     X,
     y,
     X_noise=0.01,
-    y_noise=0.5,
     alpha=0.9,
-    lambda_path=np.geomspace(1.0, 0.01, num=100),
+    lambda_path=np.geomspace(1e-3, 1e-06, num=100),
 ):
 
     X_boot = X[boot_inds, :]
@@ -26,14 +25,12 @@ def worker(
         scale(X_boot + np.random.normal(scale=X_noise * 1e-6, size=X_boot.shape))
         + np.random.normal(scale=X_noise, size=X_boot.shape)
     )
-    y_boot = scale(
-        scale(y_boot + np.random.normal(scale=y_noise * 1e-6, size=len(y_boot)))
-        + np.random.normal(scale=y_noise, size=len(y_boot))
-    )
 
-    lambdas_enet, coefs_enet, _ = enet_path(
-        X_boot, y_boot, l1_ratio=alpha, alphas=lambda_path, fit_intercept=False
-    )
+    m = LogitNet(alpha=alpha, lambda_path=lambda_path, fit_intercept=False,)
+    m.fit(X_boot, y_boot)
+
+    lambdas_enet = m.lambda_path_
+    coefs_enet = m.coef_path_.squeeze()
 
     return {
         "beta": coefs_enet != 0,
@@ -46,11 +43,9 @@ def parallel_runs(
     n_processes=10,
     n_bootstraps=1000,
     X_noise=0.01,
-    y_noise=0.5,
     alpha=0.9,
-    lambda_path=np.geomspace(10, 0.01, num=10),
-    target_col="day",
-    target_map={"0": 0, "1": 1, "2": 2},
+    lambda_path=np.geomspace(1e-3, 1e-06, num=100),
+    target_col="timepoint_coarse",
 ):
 
     boot_inds = [
@@ -58,16 +53,10 @@ def parallel_runs(
     ]
 
     X = adata.X
-    y = adata.obs[target_col].replace(target_map).values.astype(np.float32)
+    y = adata.obs[target_col].values
 
     worker_partial = partial(
-        worker,
-        X=X,
-        y=y,
-        X_noise=X_noise,
-        y_noise=y_noise,
-        alpha=alpha,
-        lambda_path=lambda_path,
+        worker, X=X, y=y, X_noise=X_noise, alpha=alpha, lambda_path=lambda_path,
     )
 
     pool = multiprocessing.Pool(processes=n_processes)
