@@ -12,6 +12,14 @@ elastic\_net\_gene\_selection.solvers.linear module
    :undoc-members:
    :show-inheritance:
 
+elastic\_net\_gene\_selection.solvers.logistic module
+-----------------------------------------------------
+
+.. automodule:: elastic_net_gene_selection.solvers.logistic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
