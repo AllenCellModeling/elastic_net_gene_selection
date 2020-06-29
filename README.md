@@ -14,6 +14,7 @@ First create a conda environment with
 ```
 conda create -n enetgsel python=3.8
 conda activate enetgsel
+conda install -c conda-forge fortran-compiler
 ```
 
 Then:
