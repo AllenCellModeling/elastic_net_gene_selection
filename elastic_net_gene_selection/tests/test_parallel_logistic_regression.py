@@ -58,7 +58,11 @@ def test_logistic_correct():
 
     # bootstrap
     out_par = parallel_runs(
-        adata, n_processes=4, n_bootstraps=10, lambda_path=LAMBDAS, target_col="day",
+        adata,
+        n_processes=4,
+        n_bootstraps=10,
+        lambda_path=LAMBDAS,
+        target_col="day",
     )
 
     # collate bootstrap results

@@ -11,7 +11,10 @@ from ..utils.genes import get_thresh_lambda_df
 
 def test_linear_works():
     X, y = make_regression(
-        n_samples=1000, n_features=100, n_informative=10, n_targets=1,
+        n_samples=1000,
+        n_features=100,
+        n_informative=10,
+        n_targets=1,
     )
 
     # quantiles for y -> string day labels

@@ -13,7 +13,10 @@ from ..solvers.linear import parallel_runs as linear_parallel
 
 def test_thresh_lambda_plot():
     X, y = make_regression(
-        n_samples=1000, n_features=100, n_informative=10, n_targets=1,
+        n_samples=1000,
+        n_features=100,
+        n_informative=10,
+        n_targets=1,
     )
 
     # quantiles for y -> string day labels

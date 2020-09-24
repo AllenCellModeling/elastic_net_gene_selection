@@ -34,7 +34,7 @@ def get_thresh_lambda_df(
 ):
     """
     get names of selected genes for each combination of thresholds and lambdas.
-    returns a df of results, with the list of gene names merged into one string 
+    returns a df of results, with the list of gene names merged into one string
     for eachthreshold/lambda combo.
 
     TODO: make this work (efficiently) with unpenalized genes
@@ -66,7 +66,8 @@ def get_thresh_lambda_df(
     )
 
     df_thresh_lam["number of genes selected"] = df_thresh_lam.swifter.apply(
-        lambda row: len(row["selected genes"]), axis="columns",
+        lambda row: len(row["selected genes"]),
+        axis="columns",
     )
 
     df_thresh_lam["selected genes"] = df_thresh_lam["selected genes"].str.join(", ")

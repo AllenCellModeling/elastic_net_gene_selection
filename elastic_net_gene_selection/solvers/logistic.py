@@ -26,7 +26,11 @@ def worker(
         + np.random.normal(scale=X_noise, size=X_boot.shape)
     )
 
-    m = LogitNet(alpha=alpha, lambda_path=lambda_path, fit_intercept=False,)
+    m = LogitNet(
+        alpha=alpha,
+        lambda_path=lambda_path,
+        fit_intercept=False,
+    )
     m.fit(X_boot, y_boot)
 
     lambdas_enet = m.lambda_path_
@@ -56,7 +60,12 @@ def parallel_runs(
     y = adata.obs[target_col].values
 
     worker_partial = partial(
-        worker, X=X, y=y, X_noise=X_noise, alpha=alpha, lambda_path=lambda_path,
+        worker,
+        X=X,
+        y=y,
+        X_noise=X_noise,
+        alpha=alpha,
+        lambda_path=lambda_path,
     )
 
     pool = multiprocessing.Pool(processes=n_processes)
